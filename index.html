@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KÁPNOS — Coffee Roasters</title>
+<meta name="description" content="Small-batch specialty coffee roasters in Serres, Greece. Roasted by hand, shipped the same morning.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="KÁPNOS — Coffee Roasters">
+<meta property="og:description" content="Small-batch specialty coffee roasters in Serres, Greece. Roasted by hand, shipped the same morning.">
+<meta property="og:image" content="https://kapnos-roasters.netlify.app/og-image.png">
+<meta property="og:url" content="https://kapnos-roasters.netlify.app/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="KÁPNOS — Coffee Roasters">
+<meta name="twitter:description" content="Small-batch specialty coffee roasters in Serres, Greece.">
+<meta name="twitter:image" content="https://kapnos-roasters.netlify.app/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C1410;
+    --ink-soft:#2A201A;
+    --paper:#F4EDE1;
+    --paper-dim:#E4D8C5;
+    --ember:#D9531E;
+    --clay:#B97A56;
+    --sage:#7C8567;
+    --line:rgba(244,237,225,.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+  .mono{font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:.18em;font-size:.72rem}
+  .display{font-family:'Bricolage Grotesque',sans-serif;line-height:.98;font-weight:800;letter-spacing:-.02em}
+  a{color:inherit;text-decoration:none}
+  .ember{color:var(--ember)}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 28px;transition:background .4s,padding .4s,border-color .4s;
+    border-bottom:1px solid transparent;}
+  nav.scrolled{background:rgba(28,20,16,.86);backdrop-filter:blur(12px);border-bottom-color:var(--line);padding:12px 28px}
+  .brand{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.15rem;letter-spacing:.02em;display:flex;align-items:center;gap:9px}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--ember);box-shadow:0 0 14px var(--ember)}
+  .nav-links{display:flex;gap:30px;align-items:center}
+  .nav-links a{font-size:.86rem;color:var(--paper-dim);transition:color .2s}
+  .nav-links a:hover{color:var(--paper)}
+  .nav-cta{border:1px solid var(--ember);color:var(--paper);padding:9px 18px;border-radius:40px;font-size:.82rem;font-weight:500;transition:background .25s,color .25s}
+  .nav-cta:hover{background:var(--ember)}
+  @media(max-width:760px){.nav-links a:not(.nav-cta){display:none}}
+
+  /* HERO */
+  header{min-height:100vh;display:flex;align-items:center;position:relative;padding:120px 0 60px;overflow:hidden}
+  .glow{position:absolute;width:680px;height:680px;border-radius:50%;
+    background:radial-gradient(circle,rgba(217,83,30,.30),transparent 62%);
+    top:-160px;right:-180px;filter:blur(20px);pointer-events:none;z-index:0}
+  .hero-grid{display:grid;grid-template-columns:1.25fr .85fr;gap:50px;align-items:center;position:relative;z-index:2}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--clay);margin-bottom:26px}
+  .eyebrow::before{content:"";width:30px;height:1px;background:var(--clay)}
+  h1{font-size:clamp(3rem,8vw,6.6rem)}
+  h1 em{font-style:italic;font-weight:400;color:var(--ember)}
+  .hero-sub{margin:28px 0 36px;font-size:1.12rem;color:var(--paper-dim);max-width:30ch}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:15px 28px;border-radius:44px;font-weight:600;font-size:.95rem;transition:transform .2s,background .25s,box-shadow .25s;cursor:pointer;border:none}
+  .btn-primary{background:var(--ember);color:#fff;box-shadow:0 10px 30px -10px var(--ember)}
+  .btn-primary:hover{transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:var(--paper);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--paper)}
+
+  /* hero card — bag */
+  .bag{position:relative;background:linear-gradient(160deg,#2E231B,#1a120d);border:1px solid var(--line);border-radius:22px;padding:30px;box-shadow:0 40px 80px -30px rgba(0,0,0,.7)}
+  .bag::after{content:"";position:absolute;inset:0;border-radius:22px;background:linear-gradient(120deg,transparent 40%,rgba(217,83,30,.10));pointer-events:none}
+  .bag-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:36px}
+  .bag-origin{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.7rem;line-height:1}
+  .bag-flag{font-size:.7rem;color:var(--sage);margin-top:6px;letter-spacing:.16em}
+  .roast-pill{font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.14em;border:1px solid var(--ember);color:var(--ember);padding:5px 11px;border-radius:30px;text-transform:uppercase}
+  .bag-notes{display:flex;flex-direction:column;gap:11px;margin-top:8px}
+  .note-row{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding-bottom:9px;font-size:.86rem}
+  .note-row span:first-child{color:var(--clay);font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase}
+  .bag-price{margin-top:26px;display:flex;align-items:baseline;gap:8px}
+  .bag-price .p{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:2rem}
+  .bag-price .u{color:var(--paper-dim);font-size:.82rem}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:40px}.bag{max-width:420px}}
+
+  /* MARQUEE */
+  .ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--ink-soft);overflow:hidden;white-space:nowrap;padding:16px 0}
+  .ticker-track{display:inline-block;animation:scroll 26s linear infinite}
+  .ticker-track span{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.3rem;color:var(--paper);margin:0 26px;text-transform:uppercase;letter-spacing:.01em}
+  .ticker-track span.dim{color:transparent;-webkit-text-stroke:1px var(--clay)}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+  @media(prefers-reduced-motion:reduce){.ticker-track{animation:none}}
+
+  /* SECTION SHELL */
+  section{padding:110px 0;position:relative}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:54px;flex-wrap:wrap}
+  .sec-title{font-size:clamp(2.1rem,5vw,3.4rem)}
+  .sec-kicker{color:var(--ember);margin-bottom:16px;display:block}
+  .sec-lead{max-width:34ch;color:var(--paper-dim);font-size:1.02rem}
+
+  /* ROAST SELECTOR (signature) */
+  #roast{background:var(--paper);color:var(--ink)}
+  #roast .sec-lead{color:#5a4a3c}
+  #roast .sec-kicker{color:var(--ember)}
+  .roast-stage{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .spectrum{display:flex;flex-direction:column;gap:6px}
+  .spectrum-bar{display:flex;gap:6px;margin-bottom:30px}
+  .seg{flex:1;height:64px;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:transform .2s,border-color .2s;position:relative}
+  .seg:hover{transform:translateY(-4px)}
+  .seg.active{border-color:var(--ink)}
+  .seg span{position:absolute;bottom:-26px;left:0;right:0;text-align:center;font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;color:#6a5a4c;text-transform:uppercase}
+  .roast-info h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:2.6rem;line-height:1;margin-bottom:4px;color:var(--ink)}
+  .roast-info .lvl{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.16em;color:var(--ember);text-transform:uppercase;margin-bottom:20px;display:block}
+  .roast-info p{color:#5a4a3c;margin-bottom:26px;min-height:78px}
+  .roast-meta{display:flex;gap:34px}
+  .roast-meta div .k{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.14em;color:#9a8775;text-transform:uppercase}
+  .roast-meta div .v{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.3rem;color:var(--ink)}
+  @media(max-width:820px){.roast-stage{grid-template-columns:1fr;gap:44px}}
+
+  /* COFFEE GRID */
+  .coffees{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .coffee{border:1px solid var(--line);border-radius:18px;padding:28px;background:var(--ink-soft);transition:transform .25s,border-color .25s;position:relative;overflow:hidden}
+  .coffee:hover{transform:translateY(-6px);border-color:var(--ember)}
+  .coffee .num{font-family:'Space Mono',monospace;font-size:.66rem;color:var(--clay);letter-spacing:.14em}
+  .coffee h4{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.5rem;margin:14px 0 4px}
+  .coffee .geo{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.14em;color:var(--sage);text-transform:uppercase}
+  .coffee p{font-size:.9rem;color:var(--paper-dim);margin:16px 0 22px}
+  .coffee .foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:16px}
+  .coffee .price{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.25rem}
+  .coffee .roast-tag{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;color:var(--ember);text-transform:uppercase}
+  @media(max-width:860px){.coffees{grid-template-columns:1fr}}
+
+  /* VISIT */
+  #visit{background:linear-gradient(180deg,var(--ink),#241913)}
+  .visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .hours{list-style:none;border-top:1px solid var(--line)}
+  .hours li{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--line);font-size:.98rem}
+  .hours li.today{color:var(--ember);font-weight:600}
+  .hours .d{font-family:'Space Mono',monospace;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase}
+  .visit-card{background:var(--ink-soft);border:1px solid var(--line);border-radius:20px;padding:38px}
+  .visit-card .label{color:var(--clay);margin-bottom:8px;display:block}
+  .visit-card .addr{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.7rem;line-height:1.1;margin-bottom:6px}
+  .visit-card .city{color:var(--paper-dim);margin-bottom:28px}
+  .visit-card .btn{width:100%;justify-content:center}
+  @media(max-width:820px){.visit-grid{grid-template-columns:1fr;gap:40px}}
+
+  /* STORY strip */
+  .story{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:10px}
+  .stat .big{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:3.2rem;line-height:1;color:var(--ember)}
+  .stat .cap{color:var(--paper-dim);font-size:.92rem;margin-top:10px}
+  @media(max-width:760px){.story{grid-template-columns:1fr;gap:30px;text-align:left}}
+
+  /* CTA band */
+  .cta-band{text-align:center;padding:120px 0}
+  .cta-band h2{font-size:clamp(2.4rem,6vw,4.6rem);margin-bottom:22px}
+  .cta-band p{color:var(--paper-dim);max-width:46ch;margin:0 auto 36px}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:54px 0 40px}
+  .foot-grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:40px}
+  .foot-brand{max-width:30ch}
+  .foot-brand p{color:var(--paper-dim);font-size:.9rem;margin-top:14px}
+  .foot-col h5{font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.16em;color:var(--clay);text-transform:uppercase;margin-bottom:16px}
+  .foot-col a{display:block;color:var(--paper-dim);font-size:.92rem;margin-bottom:10px;transition:color .2s}
+  .foot-col a:hover{color:var(--ember)}
+  .foot-base{border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;color:var(--paper-dim);font-size:.8rem}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+  :focus-visible{outline:2px solid var(--ember);outline-offset:3px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="brand" href="#top"><span class="dot"></span>KÁPNOS</a>
+  <div class="nav-links">
+    <a href="#roast">Roasts</a>
+    <a href="#coffees">Coffees</a>
+    <a href="#visit">Visit</a>
+    <a class="nav-cta" href="#visit">Order beans</a>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="glow"></div>
+  <div class="wrap hero-grid">
+    <div class="reveal in">
+      <span class="eyebrow mono">Small-batch · Roasted in Serres</span>
+      <h1 class="display">Coffee with<br>a little <em>fire</em><br>in it.</h1>
+      <p class="hero-sub">We roast in small batches the morning we ship, so the bag on your shelf still remembers the heat.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#visit">Order this week's roast →</a>
+        <a class="btn btn-ghost" href="#roast">Find your roast</a>
+      </div>
+    </div>
+    <div class="reveal in">
+      <div class="bag">
+        <div class="bag-top">
+          <div>
+            <div class="bag-origin">Sidamo</div>
+            <div class="bag-flag">ETHIOPIA · 1,900M</div>
+          </div>
+          <div class="roast-pill">House pick</div>
+        </div>
+        <div class="bag-notes">
+          <div class="note-row"><span>Tasting</span><span>Blueberry · Jasmine</span></div>
+          <div class="note-row"><span>Process</span><span>Natural</span></div>
+          <div class="note-row"><span>Roast</span><span>Light–Medium</span></div>
+          <div class="note-row"><span>Best for</span><span>Pour-over · Filter</span></div>
+        </div>
+        <div class="bag-price">
+          <span class="p">€13.50</span><span class="u">/ 250g whole bean</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>Roasted fresh</span><span class="dim">·</span><span>Single origin</span><span class="dim">·</span><span>Whole bean or ground</span><span class="dim">·</span><span>Brew bar open daily</span><span class="dim">·</span>
+    <span>Roasted fresh</span><span class="dim">·</span><span>Single origin</span><span class="dim">·</span><span>Whole bean or ground</span><span class="dim">·</span><span>Brew bar open daily</span><span class="dim">·</span>
+  </div>
+</div>
+
+<!-- SIGNATURE: roast selector -->
+<section id="roast">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="sec-kicker mono">The spectrum</span>
+        <h2 class="sec-title display">Tell us how you<br>like it, we'll pour.</h2>
+      </div>
+      <p class="sec-lead">Every bean has a sweet spot on the roast curve. Slide across and meet yours.</p>
+    </div>
+
+    <div class="roast-stage reveal">
+      <div class="spectrum">
+        <div class="spectrum-bar" role="tablist" aria-label="Roast level">
+          <button class="seg" style="background:#C98A4B" data-i="0" role="tab"><span>Light</span></button>
+          <button class="seg active" style="background:#8A4F2B" data-i="1" role="tab"><span>Medium</span></button>
+          <button class="seg" style="background:#4E2C19" data-i="2" role="tab"><span>Dark</span></button>
+        </div>
+      </div>
+      <div class="roast-info">
+        <span class="lvl" id="r-lvl">Medium roast</span>
+        <h3 id="r-name">The Everyday</h3>
+        <p id="r-desc">Balanced and rounded — caramel sweetness, a soft cocoa finish, and enough body to stand up to milk. The one you'll reach for on a Tuesday.</p>
+        <div class="roast-meta">
+          <div><div class="k">Brew</div><div class="v" id="r-brew">Espresso · Moka</div></div>
+          <div><div class="k">Notes</div><div class="v" id="r-notes">Caramel · Cocoa</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COFFEES -->
+<section id="coffees">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="sec-kicker mono">On the shelf</span>
+        <h2 class="sec-title display">This week's beans</h2>
+      </div>
+      <p class="sec-lead">Three origins, roasted to order. Pick one or let us choose — we won't get it wrong.</p>
+    </div>
+    <div class="coffees">
+      <article class="coffee reveal">
+        <div class="num">01</div>
+        <h4>Sidamo</h4>
+        <div class="geo">Ethiopia</div>
+        <p>Bright and floral, like biting into ripe berries. Our lightest pour and the one new customers fall for.</p>
+        <div class="foot"><span class="price">€13.50</span><span class="roast-tag">Light</span></div>
+      </article>
+      <article class="coffee reveal">
+        <div class="num">02</div>
+        <h4>Huila</h4>
+        <div class="geo">Colombia</div>
+        <p>Smooth, chocolatey, dependable. The everyday cup that tastes like more money than you paid.</p>
+        <div class="foot"><span class="price">€12.00</span><span class="roast-tag">Medium</span></div>
+      </article>
+      <article class="coffee reveal">
+        <div class="num">03</div>
+        <h4>Monsoon</h4>
+        <div class="geo">India</div>
+        <p>Low acidity, deep and spiced. Built for espresso and for mornings that need convincing.</p>
+        <div class="foot"><span class="price">€12.50</span><span class="roast-tag">Dark</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section id="visit">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="sec-kicker mono">Come by</span>
+        <h2 class="sec-title display">The roastery is<br>open. Walk in.</h2>
+      </div>
+      <p class="sec-lead">Smell the roast, taste before you buy, and leave with beans bagged that morning.</p>
+    </div>
+    <div class="visit-grid">
+      <ul class="hours reveal" id="hours">
+        <li><span class="d">Mon</span><span>08:00 — 18:00</span></li>
+        <li><span class="d">Tue</span><span>08:00 — 18:00</span></li>
+        <li><span class="d">Wed</span><span>08:00 — 18:00</span></li>
+        <li><span class="d">Thu</span><span>08:00 — 19:00</span></li>
+        <li><span class="d">Fri</span><span>08:00 — 19:00</span></li>
+        <li><span class="d">Sat</span><span>09:00 — 16:00</span></li>
+        <li><span class="d">Sun</span><span>Closed</span></li>
+      </ul>
+      <div class="visit-card reveal">
+        <span class="label mono">Find us</span>
+        <div class="addr">Merarchias 14</div>
+        <div class="city">Serres · Central Macedonia</div>
+        <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=Merarchias+14+Serres+Greece" target="_blank" rel="noopener">Get directions →</a>
+        <a class="btn btn-ghost" href="mailto:hello@kapnos.coffee?subject=Order%20for%20pickup" style="width:100%;justify-content:center;margin-top:12px">Order for pickup</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="story">
+      <div class="stat reveal"><div class="big">48h</div><div class="cap">From roast to your hands — never older.</div></div>
+      <div class="stat reveal"><div class="big">9</div><div class="cap">Origins on rotation through the year.</div></div>
+      <div class="stat reveal"><div class="big">1</div><div class="cap">Roaster. One person, one drum, every batch by hand.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="wrap reveal">
+    <h2 class="display">Taste the difference<br>fresh actually makes.</h2>
+    <p>Order this week's roast and we'll fire the drum the morning it ships. Or just walk in — the kettle's already on.</p>
+    <a class="btn btn-primary" href="#visit">Order beans →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#top"><span class="dot"></span>KÁPNOS</a>
+        <p>Small-batch coffee roasters in Serres, Greece. Roasted by hand, shipped the same morning.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Shop</h5>
+        <a href="#coffees">This week's beans</a>
+        <a href="#roast">Find your roast</a>
+        <a href="#visit">Order for pickup</a>
+      </div>
+      <div class="foot-col">
+        <h5>Visit</h5>
+        <a href="#visit">Hours</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Merarchias+14+Serres+Greece" target="_blank" rel="noopener">Directions</a>
+        <a href="#visit">The brew bar</a>
+      </div>
+      <div class="foot-col">
+        <h5>Say hello</h5>
+        <a href="mailto:hello@kapnos.coffee">hello@kapnos.coffee</a>
+        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+        <a href="tel:+302321000000">+30 232 100 0000</a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 KÁPNOS Coffee Roasters</span>
+      <span>Roasted in Serres · Brewed everywhere</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // nav background on scroll
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>30));
+
+  // roast selector
+  const data=[
+    {lvl:'Light roast',name:'The Bright One',desc:"Tea-like and aromatic — jasmine, citrus, a flash of berry. Roasted just past first crack to keep the origin loud and clear.",brew:'Pour-over · Filter',notes:'Floral · Citrus'},
+    {lvl:'Medium roast',name:'The Everyday',desc:"Balanced and rounded — caramel sweetness, a soft cocoa finish, and enough body to stand up to milk. The one you'll reach for on a Tuesday.",brew:'Espresso · Moka',notes:'Caramel · Cocoa'},
+    {lvl:'Dark roast',name:'The Bold One',desc:"Low acidity, deep and full — dark chocolate, toasted nuts, a long warming finish. Built for espresso and stubborn mornings.",brew:'Espresso · French press',notes:'Dark choc · Nuts'}
+  ];
+  const segs=[...document.querySelectorAll('.seg')];
+  function setRoast(i){
+    segs.forEach(s=>s.classList.toggle('active',+s.dataset.i===i));
+    const d=data[i];
+    document.getElementById('r-lvl').textContent=d.lvl;
+    document.getElementById('r-name').textContent=d.name;
+    document.getElementById('r-desc').textContent=d.desc;
+    document.getElementById('r-brew').textContent=d.brew;
+    document.getElementById('r-notes').textContent=d.notes;
+  }
+  segs.forEach(s=>s.addEventListener('click',()=>setRoast(+s.dataset.i)));
+
+  // highlight today's hours
+  const today=(new Date().getDay()+6)%7; // Mon=0
+  document.querySelectorAll('#hours li')[today]?.classList.add('today');
+
+  // scroll reveal
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.14});
+  document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
